@@ -18,6 +18,7 @@
 		0F1943C125FD0CCA004256B0 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943C025FD0CCA004256B0 /* AddItemView.swift */; };
 		0F1943CB25FD1841004256B0 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943CA25FD1841004256B0 /* PersistenceController.swift */; };
 		0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */; };
+		0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0F1943C025FD0CCA004256B0 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		0F1943CA25FD1841004256B0 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		0F1943D325FD198A004256B0 /* SimpList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpList.xcdatamodel; sourceTree = "<group>"; };
+		0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				0F1943BB25FD0A68004256B0 /* View */,
 				0F1943B625FD093F004256B0 /* ViewModel */,
+				0F9CA52F2600C7930044F2B5 /* Model */,
 				0F19439A25FD07F5004256B0 /* SimpListApp.swift */,
 				0F19439C25FD07F5004256B0 /* ContentView.swift */,
 				0F1943CA25FD1841004256B0 /* PersistenceController.swift */,
@@ -102,6 +105,14 @@
 				0F1943C025FD0CCA004256B0 /* AddItemView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0F9CA52F2600C7930044F2B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			files = (
 				0F19439D25FD07F5004256B0 /* ContentView.swift in Sources */,
 				0F1943CB25FD1841004256B0 /* PersistenceController.swift in Sources */,
+				0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */,
 				0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */,
 				0F1943C125FD0CCA004256B0 /* AddItemView.swift in Sources */,
 				0F1943B825FD095A004256B0 /* ItemViewModel.swift in Sources */,
