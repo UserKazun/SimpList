@@ -12,11 +12,25 @@ import os
 import Combine
 
 class ItemViewModel: ObservableObject {
-    @Published var itemModelStore: ItemModelStore
+    var itemModelStore: ItemModelStore
+    @Published var items: [ItemModel] = []
     
     let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
     
-    init() {
-        self.itemModelStore = ItemModelStore(false)
+    init(_ inMemory: Bool) {
+        self.itemModelStore = ItemModelStore(inMemory)
+        items = itemModelStore.items
+    }
+    
+    func createItem(_ title: String, _ detail: String = "") -> ItemModel {
+        let newItem = itemModelStore.createItem(title, detail)
+        items = itemModelStore.items
+        
+        return newItem
+    }
+    
+    func deleteItem(_ item: ItemModel) {
+        itemModelStore.removeItem(item)
+        items = itemModelStore.items
     }
 }
