@@ -9,16 +9,14 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
-    @StateObject var model = ItemViewModel()
-    
-    @FetchRequest(entity: Item.entity(), sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], animation: .spring()) var results: FetchedResults<Item>
-    @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var viewModel: ItemViewModel
+    @State private var items: [String] = ["test1", "test2"]
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 15) {
-                    ForEach(results) { item in
+                    ForEach(items, id: \.self) { item in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(item.title ?? "")
                             Text(item.detail ?? "")
@@ -50,9 +48,7 @@ struct HomeView: View {
             .navigationTitle("RealmTodo")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        model.isNewData = true
-                    }, label: {
+                    Button(action: addItem, label: {
                         Image(systemName: "plus")
                             .font(.title)
                     })
@@ -61,6 +57,12 @@ struct HomeView: View {
             .sheet(isPresented: $model.isNewData, content: {
                 AddItemView().environmentObject(model)
             })
+        }
+    }
+    
+    private func addItem() {
+        withAnimation {
+            print("addItem called")
         }
     }
 }
