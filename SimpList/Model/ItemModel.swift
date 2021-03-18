@@ -25,6 +25,7 @@ struct ItemModel {
 struct ItemModelStore {
     let container: NSPersistentContainer
     let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
+    let items: [ItemModel] = []
     
     init(_ inMemory: Bool) {
         container = NSPersistentContainer(name: "MyTodo")
