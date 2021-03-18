@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import os
 
-struct ItemModel {
+struct ItemModel: Identifiable, Hashable {
     var id: UUID? = nil
     var title: String = ""
     var detail: String = ""

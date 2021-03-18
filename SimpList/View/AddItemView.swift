@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AddItemView: View {
-    @EnvironmentObject var model: ItemViewModel
-    @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var viewModel: ItemViewModel
+    @Binding var showAddItemView: Bool
+    @State private var itemTitle = ""
+    @State private var itemDetail = ""
     
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
@@ -26,17 +28,18 @@ struct AddItemView: View {
                 
                 List {
                     Section(header: Text("Title")) {
-                        TextField("", text: $model.title)
+                        TextField("", text: $itemTitle)
                     }
                     
                     Section(header: Text("Detail")) {
-                        TextField("", text: $model.detail)
+                        TextField("", text: $itemDetail)
                 }
             }
             .padding(.vertical, 50)
 
             Button(action: {
-                model.addData(context: context)
+                _ = viewModel.createItem(itemTitle, itemDetail)
+                showAddItemView.toggle()
             }, label: {
                 Image(systemName: "plus")
                     .font(.title2)
@@ -45,15 +48,9 @@ struct AddItemView: View {
             })
             .padding()
             
-            .disabled(model.title == "" ? true: false)
-            .opacity(model.title == "" ? 0.5 : 1)
+//            .disabled(model.title == "" ? true: false)
+//            .opacity(model.title == "" ? 0.5 : 1)
             }
         }
     )}
-}
-
-struct AddItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddItemView()
-    }
 }

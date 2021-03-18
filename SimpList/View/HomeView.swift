@@ -10,13 +10,13 @@ import CoreData
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: ItemViewModel
-    @State private var items: [String] = ["test1", "test2"]
+    @State private var showAddItemView = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 15) {
-                    ForEach(items, id: \.self) { item in
+                    ForEach(viewModel.items, id: \.self) { item in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(item.title ?? "")
                             Text(item.detail ?? "")
@@ -29,14 +29,13 @@ struct HomeView: View {
                         .cornerRadius(10)
                         .contextMenu(menuItems: {
                             Button(action: {
-                                context.delete(item)
-                                try! context.save()
+                                deleteItems
                             }, label: {
                                 Text("Delete")
                             })
                             
                             Button(action: {
-                                model.EditItem(item: item)
+//                                model.EditItem(item: item)
                             }, label: {
                                 Text("Edit")
                             })
@@ -54,15 +53,21 @@ struct HomeView: View {
                     })
                 }
             }
-            .sheet(isPresented: $model.isNewData, content: {
-                AddItemView().environmentObject(model)
-            })
+            .sheet(isPresented: $showAddItemView) {
+                AddItemView(showAddItemView: $showAddItemView)
+            }
         }
     }
     
     private func addItem() {
         withAnimation {
-            print("addItem called")
+            _ = viewModel.createItem("", "")
+        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { viewModel.items[$0] }.forEach(viewModel.deleteItem)
         }
     }
 }
