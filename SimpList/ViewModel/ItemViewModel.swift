@@ -13,24 +13,59 @@ import Combine
 
 class ItemViewModel: ObservableObject {
     var itemModelStore: ItemModelStore
-    @Published var items: [ItemModel] = []
+    @Published var items: [TodoItem] = []
+    @Published var showUndoneItems: Bool = true
+    var predicate: NSPredicate {
+        if showUndoneItems {
+            return NSPredicate(format: "isDone == false")
+        }
+        return NSPredicate(format: "isDone == true")
+    }
     
-    let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
+    static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
+    
+    var cancellables: [AnyCancellable] = []
     
     init(_ inMemory: Bool) {
         self.itemModelStore = ItemModelStore(inMemory)
-        items = itemModelStore.items
+        items = itemModelStore.filtertedItems(predicate)
+        
+        cancellables.append(NotificationCenter.default
+                                .publisher(for: Notification.Name.NSManagedObjectContextObjectsDidChange)
+                                .sink { notification in
+                                    self.updateItems(notification)
+                                })
     }
     
-    func createItem(_ title: String, _ detail: String = "") -> ItemModel {
+    func updateItems(_ notification: Notification?) {
+        ItemViewModel.logger.debug("updateItems called")
+        self.items = itemModelStore.filtertedItems(predicate)
+    }
+    
+    func createItem(_ title: String, _ detail: String = "") -> TodoItem {
         let newItem = itemModelStore.createItem(title, detail)
-        items = itemModelStore.items
+        items = itemModelStore.filtertedItems(predicate)
         
         return newItem
     }
     
-    func deleteItem(_ item: ItemModel) {
+    func deleteItem(_ item: TodoItem) {
         itemModelStore.removeItem(item)
-        items = itemModelStore.items
+    }
+    
+    func toggleIsDone(_ item: TodoItem) {
+        self.itemModelStore.toggleIsDone(item)
+    }
+    
+    func toggleDisplayFilter() {
+        showUndoneItems.toggle()
+        updateItems(nil)
+    }
+    
+    static func previewViewModel() -> ItemViewModel {
+        let viewModel = ItemViewModel(true)
+        _ = viewModel.createItem("Item #1", "todo item detail")
+        
+        return viewModel
     }
 }

@@ -6,14 +6,22 @@
 //
 
 import SwiftUI
+import os
 
 @main
 struct SimpListApp: App {
-    @StateObject var viewModel: ItemViewModel = ItemViewModel()
+    @StateObject var viewModel: ItemViewModel
+    
+    static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "SimpListApp")
+    
+    init() {
+        let inMemory: Bool = ProcessInfo.processInfo.arguments.contains("TestWithInMemory")
+        _viewModel = StateObject(wrappedValue: ItemViewModel(inMemory))
+    }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
                 .environmentObject(viewModel)
         }
     }

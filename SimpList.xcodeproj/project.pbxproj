@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0F19439B25FD07F5004256B0 /* SimpListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F19439A25FD07F5004256B0 /* SimpListApp.swift */; };
-		0F19439D25FD07F5004256B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F19439C25FD07F5004256B0 /* ContentView.swift */; };
 		0F19439F25FD07F7004256B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F19439E25FD07F7004256B0 /* Assets.xcassets */; };
 		0F1943A225FD07F7004256B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F1943A125FD07F7004256B0 /* Preview Assets.xcassets */; };
 		0F1943AC25FD08C5004256B0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1943AB25FD08C5004256B0 /* Realm */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		0F19439725FD07F5004256B0 /* SimpList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F19439A25FD07F5004256B0 /* SimpListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpListApp.swift; sourceTree = "<group>"; };
-		0F19439C25FD07F5004256B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0F19439E25FD07F7004256B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F1943A125FD07F7004256B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0F1943A325FD07F7004256B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 				0F1943B625FD093F004256B0 /* ViewModel */,
 				0F9CA52F2600C7930044F2B5 /* Model */,
 				0F19439A25FD07F5004256B0 /* SimpListApp.swift */,
-				0F19439C25FD07F5004256B0 /* ContentView.swift */,
 				0F19439E25FD07F7004256B0 /* Assets.xcassets */,
 				0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */,
 				0F1943A325FD07F7004256B0 /* Info.plist */,
@@ -188,7 +185,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F19439D25FD07F5004256B0 /* ContentView.swift in Sources */,
 				0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */,
 				0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */,
 				0F1943C125FD0CCA004256B0 /* AddItemView.swift in Sources */,

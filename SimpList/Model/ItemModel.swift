@@ -9,26 +9,28 @@ import Foundation
 import CoreData
 import os
 
-struct ItemModel: Identifiable, Hashable {
+struct TodoItem: Identifiable, Hashable {
+    static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "TodoItem")
+    
     var id: UUID? = nil
     var title: String = ""
     var detail: String = ""
-    let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
+    var isDone: Bool = false
     
-    init(_ title: String, _ detail: String = "") {
+    init(_ title: String, _ detail: String = "", _ isDone: Bool = false) {
         self.id = UUID()
         self.title = title
         self.detail = detail
+        self.isDone = isDone
     }
 }
 
 struct ItemModelStore {
     let container: NSPersistentContainer
-    let logger = Logger(subsystem: "com.devKazu.SimpList", category: "Item")
-    let items: [ItemModel] = []
+    static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "ItemModelStore")
     
     init(_ inMemory: Bool) {
-        container = NSPersistentContainer(name: "MyTodo")
+        container = NSPersistentContainer(name: "SimpList")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -38,52 +40,80 @@ struct ItemModelStore {
             }
         })
     }
-        
-    func fetchFromCoreData() -> [ItemModel] {
-        var items: [ItemModel] = []
+    
+    var items: [TodoItem] {
+        var items: [TodoItem] = []
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         do {
-            items = try container.viewContext.fetch(request).map(ItemModel.init)
+            items = try container.viewContext.fetch(request).map(TodoItem.init)
         } catch {
-            logger.error("error in fetching data from coredata")
+            ItemModelStore.logger.error("error in fetching data from coredata")
+        }
+        
+        return items
+    }
+        
+    func filtertedItems(_ predicate: NSPredicate? = nil) -> [TodoItem] {
+        var items: [TodoItem] = []
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
+        do {
+            items = try container.viewContext.fetch(request).map(TodoItem.init)
+        } catch {
+            ItemModelStore.logger.error("error in fetching data from coredata")
         }
         
         return items
     }
 }
 
-extension ItemModel {
+extension TodoItem {
     init(_ item: Item) {
         self.id = item.id
         self.title = item.title ?? ""
         self.detail = item.detail ?? ""
+        self.isDone = item.isDone
     }
 }
 
 extension ItemModelStore {
-    func createItem(_ title: String, _ detail: String = "") -> ItemModel {
-        let newItem = ItemModel(title, detail)
+    @discardableResult
+    func createItem(_ title: String, _ detail: String = "", _ isDone: Bool = false) -> TodoItem {
+        let newItem = TodoItem(title, detail)
         let description = NSEntityDescription.entity(forEntityName: "Item", in: container.viewContext)!
         let newCoreDataItem = Item(entity: description, insertInto: container.viewContext)
         newCoreDataItem.id = newItem.id
         newCoreDataItem.title = newItem.title
         newCoreDataItem.detail = newItem.detail
+        newCoreDataItem.isDone = newItem.isDone
         save()
         
         return newItem
     }
     
-    func removeItem(_ item: ItemModel) {
+    func removeItem(_ item: TodoItem) {
         guard let id = item.id else { return }
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Item")
         request.predicate = NSPredicate.init(format: "id == %@", id as CVarArg)
         
-        let deleteRequest = NSBatchDeleteRequest.init(fetchRequest: request)
-        do {
-            try self.container.viewContext.execute(deleteRequest)
-        } catch {
-            print(error)
-        }
+        guard let items = try? container.viewContext.fetch(request),
+              let coreDataItem = items.first as? Item, items.count == 1 else { return }
+        
+        container.viewContext.delete(coreDataItem)
+        save()
+    }
+    
+    func toggleIsDone(_ item: TodoItem) {
+        guard let id = item.id else { return }
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Item")
+        request.predicate = NSPredicate.init(format: "id == %@", id as CVarArg)
+        
+        guard let items = try? container.viewContext.fetch(request),
+              let coreDataItem = items.first as? Item, items.count == 1 else { return }
+        
+        coreDataItem.isDone = !coreDataItem.isDone
         save()
     }
     

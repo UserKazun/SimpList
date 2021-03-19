@@ -17,7 +17,7 @@ struct AddItemView: View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
             VStack {
                 HStack {
-                    Text("\(model.updateItem == nil ? "Add New" : "Update") Task")
+                    Text("")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
                         .foregroundColor(.black)
@@ -38,7 +38,9 @@ struct AddItemView: View {
             .padding(.vertical, 50)
 
             Button(action: {
-                _ = viewModel.createItem(itemTitle, itemDetail)
+                withAnimation {
+                    _ = viewModel.createItem(itemTitle, itemDetail)
+                }
                 showAddItemView.toggle()
             }, label: {
                 Image(systemName: "plus")
