@@ -14,54 +14,46 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 15) {
-                    ForEach(viewModel.items, id: \.self) { item in
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(item.title ?? "")
-                            Text(item.detail ?? "")
-                                .font(.caption)
-                                .foregroundColor(.gray)
+            List {
+                ForEach(viewModel.items, id: \.self) { item in
+                    TodoItemView(item: item)
+                        .onTapGesture {
+                            self.viewModel.toggleIsDone(item)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(10)
-                        .background(Color.gray.opacity(0.15))
-                        .cornerRadius(10)
-                        .contextMenu(menuItems: {
-                            Button(action: {
-                                deleteItems
-                            }, label: {
-                                Text("Delete")
-                            })
-                            
-                            Button(action: {
-//                                model.EditItem(item: item)
-                            }, label: {
-                                Text("Edit")
-                            })
-                        })
-                    }
                 }
-                .padding()
+                .onDelete(perform: deleteItems)
             }
             .navigationTitle("RealmTodo")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: addItem, label: {
-                        Image(systemName: "plus")
-                            .font(.title)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("Edit")
                     })
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Button(action: {
+                            viewModel.toggleDisplayFilter()
+                        }, label: {
+                            Image(systemName: viewModel.showUndoneItems ? "checkmark" : "circle")
+                        })
+                        
+                        Button(action: {
+                            showAddItemView.toggle()
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(.title)
+                        })
+                    }
+                    
                 }
             }
             .sheet(isPresented: $showAddItemView) {
                 AddItemView(showAddItemView: $showAddItemView)
             }
-        }
-    }
-    
-    private func addItem() {
-        withAnimation {
-            _ = viewModel.createItem("", "")
         }
     }
     
@@ -75,5 +67,22 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct TodoItemView: View {
+    let item: TodoItem
+    
+    var body: some View {
+        HStack {
+            Image(systemName: item.isDone ? "checkmark" : "circle")
+            
+            VStack {
+                Text(item.title)
+                Text(item.detail)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+        }
     }
 }
