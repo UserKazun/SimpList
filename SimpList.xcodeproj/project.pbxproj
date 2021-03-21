@@ -36,6 +36,7 @@
 		0F87DEEC2607568600BC5F00 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DED92607568600BC5F00 /* Montserrat-SemiBoldItalic.ttf */; };
 		0F87DEED2607568600BC5F00 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEDA2607568600BC5F00 /* Montserrat-ExtraBoldItalic.ttf */; };
 		0F87DEF0260756A200BC5F00 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DEEF260756A200BC5F00 /* FontsManager.swift */; };
+		0F87DEF6260772EC00BC5F00 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEF5260772EC00BC5F00 /* .gitignore */; };
 		0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		0F87DED92607568600BC5F00 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		0F87DEDA2607568600BC5F00 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		0F87DEEF260756A200BC5F00 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
+		0F87DEF5260772EC00BC5F00 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 			children = (
 				0F87DEC72607568600BC5F00 /* Montserrat */,
 				0F87DEEF260756A200BC5F00 /* FontsManager.swift */,
+				0F87DEF5260772EC00BC5F00 /* .gitignore */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				0F87DEE12607568600BC5F00 /* Montserrat-Thin.ttf in Resources */,
 				0F87DEDE2607568600BC5F00 /* Montserrat-Light.ttf in Resources */,
 				0F87DEE62607568600BC5F00 /* Montserrat-ExtraLightItalic.ttf in Resources */,
+				0F87DEF6260772EC00BC5F00 /* .gitignore in Resources */,
 				0F87DEDD2607568600BC5F00 /* Montserrat-BoldItalic.ttf in Resources */,
 				0F87DEDF2607568600BC5F00 /* Montserrat-ThinItalic.ttf in Resources */,
 				0F87DEE72607568600BC5F00 /* Montserrat-ExtraBold.ttf in Resources */,
