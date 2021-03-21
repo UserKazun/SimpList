@@ -14,13 +14,13 @@ struct TodoItem: Identifiable, Hashable {
     
     var id: UUID? = nil
     var title: String = ""
-    var detail: String = ""
+    var date: String = ""
     var isDone: Bool = false
     
-    init(_ title: String, _ detail: String = "", _ isDone: Bool = false) {
+    init(_ title: String, _ date: String = "", _ isDone: Bool = false) {
         self.id = UUID()
         self.title = title
-        self.detail = detail
+        self.date = date
         self.isDone = isDone
     }
 }
@@ -52,41 +52,26 @@ struct ItemModelStore {
         
         return items
     }
-        
-    func filtertedItems(_ predicate: NSPredicate? = nil) -> [TodoItem] {
-        var items: [TodoItem] = []
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
-        if let predicate = predicate {
-            request.predicate = predicate
-        }
-        do {
-            items = try container.viewContext.fetch(request).map(TodoItem.init)
-        } catch {
-            ItemModelStore.logger.error("error in fetching data from coredata")
-        }
-        
-        return items
-    }
 }
 
 extension TodoItem {
     init(_ item: Item) {
         self.id = item.id
         self.title = item.title ?? ""
-        self.detail = item.detail ?? ""
+        self.date = item.date ?? ""
         self.isDone = item.isDone
     }
 }
 
 extension ItemModelStore {
     @discardableResult
-    func createItem(_ title: String, _ detail: String = "", _ isDone: Bool = false) -> TodoItem {
-        let newItem = TodoItem(title, detail)
+    func createItem(_ title: String, _ date: String = "", _ isDone: Bool = false) -> TodoItem {
+        let newItem = TodoItem(title, date)
         let description = NSEntityDescription.entity(forEntityName: "Item", in: container.viewContext)!
         let newCoreDataItem = Item(entity: description, insertInto: container.viewContext)
         newCoreDataItem.id = newItem.id
         newCoreDataItem.title = newItem.title
-        newCoreDataItem.detail = newItem.detail
+        newCoreDataItem.date = newItem.date
         newCoreDataItem.isDone = newItem.isDone
         save()
         
