@@ -10,8 +10,6 @@
 		0F19439B25FD07F5004256B0 /* SimpListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F19439A25FD07F5004256B0 /* SimpListApp.swift */; };
 		0F19439F25FD07F7004256B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F19439E25FD07F7004256B0 /* Assets.xcassets */; };
 		0F1943A225FD07F7004256B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F1943A125FD07F7004256B0 /* Preview Assets.xcassets */; };
-		0F1943AC25FD08C5004256B0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1943AB25FD08C5004256B0 /* Realm */; };
-		0F1943AE25FD08C5004256B0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1943AD25FD08C5004256B0 /* RealmSwift */; };
 		0F1943B825FD095A004256B0 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943B725FD095A004256B0 /* ItemViewModel.swift */; };
 		0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943BC25FD0A7C004256B0 /* HomeView.swift */; };
 		0F1943C125FD0CCA004256B0 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943C025FD0CCA004256B0 /* AddItemView.swift */; };
@@ -37,8 +35,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F1943AE25FD08C5004256B0 /* RealmSwift in Frameworks */,
-				0F1943AC25FD08C5004256B0 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +67,8 @@
 				0F19439E25FD07F7004256B0 /* Assets.xcassets */,
 				0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */,
 				0F1943A325FD07F7004256B0 /* Info.plist */,
+				0F298D772604FA090031760C /* SimpListTests */,
+				0F298D782604FA160031760C /* SimpListUITests */,
 				0F1943A025FD07F7004256B0 /* Preview Content */,
 			);
 			path = SimpList;
@@ -101,6 +99,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0F298D772604FA090031760C /* SimpListTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SimpListTests;
+			sourceTree = "<group>";
+		};
+		0F298D782604FA160031760C /* SimpListUITests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SimpListUITests;
+			sourceTree = "<group>";
+		};
 		0F9CA52F2600C7930044F2B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +138,6 @@
 			);
 			name = SimpList;
 			packageProductDependencies = (
-				0F1943AB25FD08C5004256B0 /* Realm */,
-				0F1943AD25FD08C5004256B0 /* RealmSwift */,
 			);
 			productName = SimpList;
 			productReference = 0F19439725FD07F5004256B0 /* SimpList.app */;
@@ -390,19 +400,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		0F1943AB25FD08C5004256B0 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0F1943AA25FD08C5004256B0 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		0F1943AD25FD08C5004256B0 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0F1943AA25FD08C5004256B0 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */ = {
