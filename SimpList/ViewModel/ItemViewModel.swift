@@ -74,6 +74,7 @@ class ItemViewModel: ObservableObject {
         } else {
             dateFormat.dateFormat = "yyyy-MM-dd E"
         }
+        
         dateFormat.timeZone = timeZone
         let dateString = dateFormat.string(from: Date())
         
