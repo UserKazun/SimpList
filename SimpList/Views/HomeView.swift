@@ -23,7 +23,12 @@ struct HomeView: View {
                 Header()
                 
                 HStack {
-                    Text("\(viewModel.items.count) Tasks Today")
+                    Text("\(viewModel.items.count)")
+                        .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
+                        .foregroundColor(Color(#colorLiteral(red: 0.368627451, green: 0.431372549, blue: 1, alpha: 1)))
+                        .fontWeight(.semibold)
+                    
+                    Text("Tasks Today")
                         .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
                         .foregroundColor(Color("primary"))
                         .fontWeight(.semibold)
