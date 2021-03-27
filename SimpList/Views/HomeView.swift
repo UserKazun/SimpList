@@ -12,7 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: ItemViewModel
     @State private var showAddItemView = false
     
-    @State var isInputKeybord: Bool = false
+    @State var isFocused: Bool = false
     
     @State private var itemTitle: String = ""
     @State private var date: Date = Date()
@@ -83,22 +83,18 @@ struct HomeView: View {
             
             HStack {
                 TextField("Write a new task...", text: $itemTitle,
-                          onEditingChanged: { begin in
-                            if begin {
-                                self.isInputKeybord.toggle()
-                            }
-                          },
-                          
                           onCommit: {
                             if itemTitle != "" {
                                 let dateString = viewModel.formattedDateForUserData(date: date)
                                 _ = viewModel.createItem(itemTitle, dateString)
                             }
                             
-                            self.isInputKeybord.toggle()
                             itemTitle = ""
                           })
                     .padding()
+                    .onTapGesture {
+                        isFocused.toggle()
+                    }
                 
                 DatePicker("", selection: $date, displayedComponents: .hourAndMinute)
                     .padding()
@@ -110,51 +106,12 @@ struct HomeView: View {
             .padding(.top, 20)
             .animation(.spring())
         })
-        .background(isInputKeybord ? Color("background").opacity(0.8).edgesIgnoringSafeArea(.all) : Color("background").edgesIgnoringSafeArea(.all))
+        .onTapGesture {
+            isFocused.toggle()
+            hideKeyboard()
+        }
+        .background(isFocused ? Color("background").opacity(0.8).edgesIgnoringSafeArea(.all) : Color("background").edgesIgnoringSafeArea(.all))
     }
-//        NavigationView {
-//            List {
-//                ForEach(viewModel.items, id: \.self) { item in
-//                    TodoItemView(item: item)
-//                        .onTapGesture {
-//                            self.viewModel.toggleIsDone(item)
-//                        }
-//                }
-//                .onDelete(perform: deleteItems)
-//            }
-//            .navigationTitle("RealmTodo")
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button(action: {
-//
-//                    }, label: {
-//                        Text("Edit")
-//                    })
-//                }
-//
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    HStack {
-//                        Button(action: {
-//                            viewModel.toggleDisplayFilter()
-//                        }, label: {
-//                            Image(systemName: viewModel.showUndoneItems ? "checkmark" : "circle")
-//                        })
-//
-//                        Button(action: {
-//                            showAddItemView.toggle()
-//                        }, label: {
-//                            Image(systemName: "plus")
-//                                .font(.title)
-//                        })
-//                    }
-//
-//                }
-//            }
-//            .sheet(isPresented: $showAddItemView) {
-//                AddItemView(showAddItemView: $showAddItemView)
-//            }
-//        }
-//    }
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -213,4 +170,8 @@ struct Header: View {
         )
         .padding()
     }
+}
+
+func hideKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 }
