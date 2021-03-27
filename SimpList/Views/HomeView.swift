@@ -10,17 +10,17 @@ import CoreData
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: ItemViewModel
-    @State private var showAddItemView = false
-    
-    @State var isFocused: Bool = false
     
     @State private var itemTitle: String = ""
     @State private var date: Date = Date()
     
+    @State private var isShowMoreView = false
+    @State var isFocused: Bool = false
+    
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
             VStack {
-                Header()
+                //Header()
                 
                 HStack {
                     Text("\(viewModel.items.count)")
@@ -59,9 +59,18 @@ struct HomeView: View {
                                     .fontWeight(.regular)
                                     .multilineTextAlignment(.leading)
                                 
-                                Text("\(item.date)")
+                                Text("\(item.startDate)")
                                     .font(Font.custom(FontsManager.Monstserrat.medium, size: 14))
                                     .foregroundColor(Color.gray.opacity(0.8))
+                                
+                                if item.endDate != "" {
+                                    Text(" ~ \(item.endDate)")
+                                        .font(Font.custom(FontsManager.Monstserrat.medium, size: 14))
+                                        .foregroundColor(Color.gray.opacity(0.8))
+                                }
+                            }
+                            .onTapGesture {
+                                isShowMoreView.toggle()
                             }
                             .contextMenu(menuItems: {
                                 Button(action: {
@@ -74,6 +83,12 @@ struct HomeView: View {
                             })
                             
                             Spacer()
+                            
+                            if item.note != "" {
+                                Image(systemName: "pencil")
+                                    .foregroundColor(.black)
+                                    .padding(.trailing, 10)
+                            }
                         }
                         .padding(.leading)
                         .padding(.top, 5)
@@ -85,8 +100,10 @@ struct HomeView: View {
                 TextField("Write a new task...", text: $itemTitle,
                           onCommit: {
                             if itemTitle != "" {
-                                let dateString = viewModel.formattedDateForUserData(date: date)
-                                _ = viewModel.createItem(itemTitle, dateString)
+                                let startDateString = viewModel.formattedDateForUserData(date: date)
+                                let endDateString = ""
+                                let note = ""
+                                _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
                             }
                             
                             itemTitle = ""
@@ -96,8 +113,13 @@ struct HomeView: View {
                         isFocused.toggle()
                     }
                 
-                DatePicker("", selection: $date, displayedComponents: .hourAndMinute)
-                    .padding()
+                Button(action: {
+                    isShowMoreView.toggle()
+                }, label: {
+                    Text("more")
+                        .font(Font.custom(FontsManager.Monstserrat.medium, size: 17))
+                })
+                .padding()
             }
             .frame(height: 50)
             .background(Color("secondary"))
@@ -111,6 +133,9 @@ struct HomeView: View {
             hideKeyboard()
         }
         .background(isFocused ? Color("background").opacity(0.8).edgesIgnoringSafeArea(.all) : Color("background").edgesIgnoringSafeArea(.all))
+        .sheet(isPresented: $isShowMoreView, content: {
+            MoreView(isShowMoreView: $isShowMoreView)
+        })
     }
 }
 

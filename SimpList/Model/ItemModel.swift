@@ -14,13 +14,17 @@ struct TodoItem: Identifiable, Hashable {
     
     var id: UUID? = nil
     var title: String = ""
-    var date: String = ""
+    var startDate: String = ""
+    var endDate: String = ""
+    var note: String = ""
     var isDone: Bool = false
     
-    init(_ title: String, _ date: String = "", _ isDone: Bool = false) {
+    init(_ title: String, _ startDate: String = "", _ endDate: String = "", _ note: String, _ isDone: Bool = false) {
         self.id = UUID()
         self.title = title
-        self.date = date
+        self.startDate = startDate
+        self.endDate = endDate
+        self.note = note
         self.isDone = isDone
     }
 }
@@ -58,20 +62,24 @@ extension TodoItem {
     init(_ item: Item) {
         self.id = item.id
         self.title = item.title ?? ""
-        self.date = item.date ?? ""
+        self.startDate = item.startDate ?? ""
+        self.endDate = item.endDate ?? ""
+        self.note = item.note ?? ""
         self.isDone = item.isDone
     }
 }
 
 extension ItemModelStore {
     @discardableResult
-    func createItem(_ title: String, _ date: String = "", _ isDone: Bool = false) -> TodoItem {
-        let newItem = TodoItem(title, date)
+    func createItem(_ title: String, _ startDate: String = "", _ endDate: String = "", _ note: String, _ isDone: Bool = false) -> TodoItem {
+        let newItem = TodoItem(title, startDate, endDate, note)
         let description = NSEntityDescription.entity(forEntityName: "Item", in: container.viewContext)!
         let newCoreDataItem = Item(entity: description, insertInto: container.viewContext)
         newCoreDataItem.id = newItem.id
         newCoreDataItem.title = newItem.title
-        newCoreDataItem.date = newItem.date
+        newCoreDataItem.startDate = newItem.startDate
+        newCoreDataItem.endDate = newItem.endDate
+        newCoreDataItem.note = newItem.note
         newCoreDataItem.isDone = newItem.isDone
         save()
         

@@ -38,8 +38,8 @@ class ItemViewModel: ObservableObject {
         self.items = itemModelStore.items
     }
     
-    func createItem(_ title: String, _ detail: String = "") -> TodoItem {
-        let newItem = itemModelStore.createItem(title, detail)
+    func createItem(_ title: String, _ startDate: String = "", _ endDate: String = "", _ note: String) -> TodoItem {
+        let newItem = itemModelStore.createItem(title, startDate, endDate, note)
         items = itemModelStore.items
         
         return newItem
@@ -57,7 +57,7 @@ class ItemViewModel: ObservableObject {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .medium
         dateFormat.timeStyle = .medium
-        dateFormat.dateFormat = "HH:mm"
+        dateFormat.dateFormat = "yyyy/M/d E HH:mm"
         dateFormat.timeZone = timeZone
         let dateString = dateFormat.string(from: date)
         
@@ -68,13 +68,7 @@ class ItemViewModel: ObservableObject {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .medium
         dateFormat.timeStyle = .medium
-        
-        if TimeZone(identifier: "America/Halifax") == timeZone {
-            dateFormat.dateFormat = "E MM-dd-yyyy"
-        } else {
-            dateFormat.dateFormat = "yyyy-MM-dd E"
-        }
-        
+        dateFormat.dateFormat = "yyyy-MM-dd E"
         dateFormat.timeZone = timeZone
         let dateString = dateFormat.string(from: Date())
         
@@ -83,7 +77,7 @@ class ItemViewModel: ObservableObject {
     
     static func previewViewModel() -> ItemViewModel {
         let viewModel = ItemViewModel(true)
-        _ = viewModel.createItem("Item #1", "todo item detail")
+        _ = viewModel.createItem("Item #1", "todo item start date", "todo item end date", "note")
         
         return viewModel
     }
