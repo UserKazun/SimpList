@@ -13,6 +13,7 @@
 		0F1943B825FD095A004256B0 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943B725FD095A004256B0 /* ItemViewModel.swift */; };
 		0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943BC25FD0A7C004256B0 /* HomeView.swift */; };
 		0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */; };
+		0F20127F260F64FE00B6885D /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20127E260F64FE00B6885D /* MoreView.swift */; };
 		0F87DEB72607504500BC5F00 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEB62607504500BC5F00 /* checkmark.json */; };
 		0F87DEBC2607508600BC5F00 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DEBB2607508600BC5F00 /* LottieView.swift */; };
 		0F87DEC4260751A900BC5F00 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0F87DEC3260751A900BC5F00 /* Lottie */; };
@@ -49,6 +50,7 @@
 		0F1943B725FD095A004256B0 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		0F1943BC25FD0A7C004256B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0F1943D325FD198A004256B0 /* SimpList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpList.xcdatamodel; sourceTree = "<group>"; };
+		0F20127E260F64FE00B6885D /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		0F87DEB62607504500BC5F00 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
 		0F87DEBB2607508600BC5F00 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		0F87DEC82607568600BC5F00 /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				0F1943BC25FD0A7C004256B0 /* HomeView.swift */,
+				0F20127E260F64FE00B6885D /* MoreView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				0F87DEBC2607508600BC5F00 /* LottieView.swift in Sources */,
 				0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */,
 				0F19439B25FD07F5004256B0 /* SimpListApp.swift in Sources */,
+				0F20127F260F64FE00B6885D /* MoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
