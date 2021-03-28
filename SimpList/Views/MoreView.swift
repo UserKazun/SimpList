@@ -17,7 +17,8 @@ struct MoreView: View {
     @State var note: String = ""
     
     @State private var isShowMapView: Bool = false
-    @State private var isShowNote: Bool = false
+    
+    @State private var isFocused: Bool = false
     
     var item: TodoItem?
     @State private var editItem: TodoItem
@@ -40,7 +41,7 @@ struct MoreView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             TextField("New Task ...", text: $editItem.title)
-                                .font(Font.custom(FontsManager.Monstserrat.bold, size: 24))
+                                .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
                         }
                         .frame(height: 20)
                         .padding(.leading, 50)
@@ -55,11 +56,17 @@ struct MoreView: View {
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
                                 .foregroundColor(Color("primary"))
                                 .padding(.trailing, 10)
-                            DatePicker("", selection: $startDate)
-                                .labelsHidden()
+                            
+                            Text("\(editItem.startDate)")
+                                .font(Font.custom(FontsManager.Monstserrat.medium, size: 17))
+                                .foregroundColor(Color("component"))
                         }
                         .padding(.leading, 50)
-                        .padding(.bottom, 15)
+                        
+                        DatePicker("", selection: $startDate)
+                            .labelsHidden()
+                            .padding(.leading, 94)
+                            .padding(.bottom, 10)
                         
                         HStack {
                             Image(systemName: "arrow.counterclockwise.circle")
@@ -68,42 +75,27 @@ struct MoreView: View {
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
                                 .foregroundColor(Color("primary"))
                                 .padding(.trailing, 17)
-                            DatePicker("", selection: $endDate)
-                                .labelsHidden()
-                        }
-                        .padding(.leading, 50)
-                        .padding(.bottom, 15)
-                        
-                        HStack {
-                            Image(systemName: "location")
-                                .padding(.trailing, 15)
                             
-                            Text("Location")
-                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
-                                .foregroundColor(Color("primary"))
+                            Text("\(editItem.endDate)")
+                                .font(Font.custom(FontsManager.Monstserrat.medium, size: 17))
+                                .foregroundColor(Color("component"))
                         }
                         .padding(.leading, 50)
-                        .padding(.bottom, 15)
-                        .onTapGesture {
-                            isShowMapView.toggle()
-                        }
                         
-                        HStack {
-                            Image(systemName: "pencil")
-                                .padding(.trailing, 15)
-                            
-                            Text("Note")
-                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
-                                .foregroundColor(Color("primary"))
-                        }
-                        .padding(.leading, 50)
-                        .padding(.bottom, 15)
-                        .onTapGesture {
-                            withAnimation {
-                                isShowNote.toggle()
+                        DatePicker("", selection: $endDate)
+                            .labelsHidden()
+                            .padding(.leading, 94)
+                            .padding(.bottom, 15)
+                        
+                        SubItem(systemName: "location", textTitle: "Location")
+                            .padding(.bottom, 20)
+                            .onTapGesture {
+                                isShowMapView.toggle()
                             }
-                        }
                         
+                        SubItem(systemName: "pencil", textTitle: "Note")
+                            .padding(.leading, 2)
+                            
                         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top), content: {
                             VStack {
                                 TextEditor(text: $editItem.note)
@@ -111,6 +103,9 @@ struct MoreView: View {
                                     .frame(width: UIScreen.main.bounds.width - 100, height: 250)
                                     .colorMultiply(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
                                     .cornerRadius(15)
+                                    .onTapGesture {
+                                        isFocused = true
+                                    }
                             }
                             .padding(.leading, 50)
                             .padding(.bottom, 15)
@@ -122,10 +117,10 @@ struct MoreView: View {
                                     .foregroundColor(Color("primary").opacity(0.28))
                             }
                         })
-                        .opacity(isShowNote ? 1 : 0)
                         
                     }
                 })
+                .offset(y: isFocused ? -120 : 0)
                 
                 Button(action: {
                     let startDateString = viewModel.formattedDateForUserData(inputDate: startDate)
@@ -161,6 +156,7 @@ struct MoreView: View {
             
         }
         .onTapGesture {
+            isFocused = false
             hideKeyboard()
         }
         .background(Color("background").edgesIgnoringSafeArea(.all))
@@ -188,8 +184,6 @@ struct SubItem: View {
     var systemName: String = ""
     var textTitle: String = ""
     
-    @Binding var isShowMapView: Bool
-    
     var body: some View {
         HStack {
             Image(systemName: systemName)
@@ -199,10 +193,6 @@ struct SubItem: View {
                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
         }
         .padding(.leading, 50)
-        .padding(.bottom, 15)
-        .onTapGesture {
-            isShowMapView.toggle()
-        }
     }
 }
 
