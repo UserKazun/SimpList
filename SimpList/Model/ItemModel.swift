@@ -98,6 +98,36 @@ extension ItemModelStore {
         save()
     }
     
+    func updateItem(
+        _ id: UUID,
+        title: String? = nil,
+        startDate: String? = nil,
+        endDate: String? = nil,
+        note: String? = nil,
+        isDone: Bool? = nil
+    ) -> TodoItem? {
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Item")
+        request.predicate = NSPredicate.init(format: "id == %@", id as CVarArg)
+        
+        guard let items = try? container.viewContext.fetch(request),
+              items.count == 1, let coreDataItem = items.first as? Item else { return nil }
+        if let title = title {
+            coreDataItem.title = title
+        }
+        if let startDate = startDate {
+            coreDataItem.startDate = startDate
+        }
+        if let endDate = endDate {
+            coreDataItem.endDate = endDate
+        }
+        if let note = note {
+            coreDataItem.note = note
+        }
+        save()
+        
+        return refetchItem(id)
+    }
+    
     func toggleIsDone(_ item: TodoItem) {
         guard let id = item.id else { return }
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Item")
@@ -117,5 +147,14 @@ extension ItemModelStore {
         } catch {
             print(error)
         }
+    }
+    
+    func refetchItem(_ id: UUID) -> TodoItem? {
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Item")
+        request.predicate = NSPredicate.init(format: "id == %@", id as CVarArg)
+        guard let items = try? container.viewContext.fetch(request),
+              items.count == 1, let coreDataItem = items.first as? Item else { return nil }
+        
+        return TodoItem(coreDataItem)
     }
 }
