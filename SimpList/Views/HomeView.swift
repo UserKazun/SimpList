@@ -88,7 +88,7 @@ struct HomeView: View {
                                 
                                 if item.note != "" {
                                     Image(systemName: "pencil")
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("primary"))
                                         .padding(.trailing, 10)
                                 }
                             }
@@ -133,7 +133,7 @@ struct HomeView: View {
             .sheet(isPresented: $isShowMoreView, content: {
                 MoreView(nil)
             })
-            .background(isFocused ? Color("background").opacity(0.8).edgesIgnoringSafeArea(.all) : Color("background").edgesIgnoringSafeArea(.all))
+            .background(Color("background").edgesIgnoringSafeArea(.all))
         }
     }
 }
