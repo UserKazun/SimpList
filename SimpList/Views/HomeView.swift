@@ -102,7 +102,7 @@ struct HomeView: View {
                     TextField("Write a new task...", text: $itemTitle,
                               onCommit: {
                                 if itemTitle != "" {
-                                    let startDateString = viewModel.formattedDateForUserData(date: date)
+                                    let startDateString = viewModel.formattedDateForUserData(inputDate: date)
                                     let endDateString = ""
                                     let note = ""
                                     _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
@@ -209,7 +209,7 @@ struct CustomTextField: View {
             TextField("Write a new task...", text: $itemTitle,
                       onCommit: {
                         if itemTitle != "" {
-                            let startDateString = viewModel.formattedDateForUserData(date: date)
+                            let startDateString = viewModel.formattedDateForUserData(inputDate: date)
                             let endDateString = ""
                             let note = ""
                             _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
