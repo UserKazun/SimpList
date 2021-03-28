@@ -18,28 +18,13 @@ struct HomeView: View {
     @State private var isTapItem: Bool = false
     @State var isFocused: Bool = false
     
-    @State var navigationBarHiddened: Bool = false
+    @State var isNavigationBarHidden: Bool = false
     
     var body: some View {
         NavigationView {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
                 VStack {
                     Header()
-                    
-                    HStack {
-                        Text("\(viewModel.items.count)")
-                            .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
-                            .foregroundColor(Color("component"))
-                            .fontWeight(.semibold)
-                        
-                        Text("Tasks")
-                            .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
-                            .foregroundColor(Color("primary"))
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                    }
-                    .padding()
                     
                     ScrollView(.vertical, showsIndicators: false, content: {
                         ForEach(viewModel.items, id: \.self) { item in
@@ -58,24 +43,14 @@ struct HomeView: View {
                                 })
                                 
                                 NavigationLink(
-                                    destination: MoreView(item),
+                                    destination: MoreView(item).navigationBarTitleDisplayMode(.inline),
                                     label: {
                                         VStack(alignment: .leading) {
                                             Text("\(item.title)")
-                                                .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
-                                                .fontWeight(.regular)
+                                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 18))
                                                 .foregroundColor(Color("primary"))
-                                                .multilineTextAlignment(.leading)
-                                            
-                                            Text("\(item.startDate)")
-                                                .font(Font.custom(FontsManager.Monstserrat.medium, size: 14))
-                                                .foregroundColor(Color.gray.opacity(0.8))
-                                            
-                                            if item.endDate != "" {
-                                                Text(" ~ \(item.endDate)")
-                                                    .font(Font.custom(FontsManager.Monstserrat.medium, size: 14))
-                                                    .foregroundColor(Color.gray.opacity(0.8))
-                                            }
+                                                .truncationMode(.tail)
+                                                .lineLimit(1)
                                         }
                                     })
                                     .contextMenu(menuItems: {
@@ -89,58 +64,37 @@ struct HomeView: View {
                                     })
                                 
                                 Spacer()
-                                
-                                if item.note != "" {
-                                    Image(systemName: "pencil")
-                                        .foregroundColor(Color("primary"))
-                                        .padding(.trailing, 10)
-                                }
                             }
                             .padding(.leading)
+                            .padding(.trailing, 70)
                             .padding(.top, 5)
                         }
+                        .padding(.top)
                     })
                 }
                 
-                HStack {
-                    TextField("Write a new task...", text: $itemTitle,
-                              onCommit: {
-                                if itemTitle != "" {
-                                    let startDateString = viewModel.formattedDateForUserData(inputDate: date)
-                                    let endDateString = ""
-                                    let note = ""
-                                    _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
-                                }
-                                
-                                itemTitle = ""
-                              })
-                        .padding()
-                        .onTapGesture {
-                            isFocused.toggle()
-                        }
-                    
-                    Button(action: {
-                        isShowMoreView.toggle()
-                    }, label: {
-                        Text("more")
-                            .font(Font.custom(FontsManager.Monstserrat.medium, size: 17))
-                    })
-                    .padding()
-                }
-                .frame(height: 50)
-                .background(Color("secondary"))
-                .cornerRadius(15)
+                Button(action: {
+                    isShowMoreView.toggle()
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus")
+                            .font(.title2)
+                    }
+                    //.padding()
+                    .frame(width: 50, height: 50)
+                    .background(Color("component"))
+                    .foregroundColor(.white)
+                    .cornerRadius(15)
+                })
                 .padding()
-                .padding(.top, 20)
-                .animation(.spring())
             })
             .sheet(isPresented: $isShowMoreView, content: {
                 MoreView(nil)
             })
             .background(Color("background").edgesIgnoringSafeArea(.all))
-            .navigationBarHidden(navigationBarHiddened)
+            .navigationBarHidden(isNavigationBarHidden)
             .onAppear {
-                navigationBarHiddened = true
+                isNavigationBarHidden = true
             }
         }
     }
@@ -155,52 +109,30 @@ struct HomeView_Previews: PreviewProvider {
 struct Header: View {
     @EnvironmentObject var viewModel: ItemViewModel
     
-    @State var isShow = false
-    @State var viewState = CGSize.zero
-    @State var isDragging = false
-    
     var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                Text("SimpList")
-                    .font(Font.custom(FontsManager.Monstserrat.bold, size: geometry.size.width / 10))
-                    .foregroundColor(.white)
-                    .offset(x: viewState.width / 15, y: viewState.height / 15)
-                    .offset(x: 0, y: -70)
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Welcome!")
+                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
+                    .foregroundColor(Color("primary"))
+                
+                Spacer()
+                
+                Text("Today")
+                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
+                    .foregroundColor(Color("primary"))
                 
                 Text("\(viewModel.formattedDateForHeader())")
-                    .font(Font.custom(FontsManager.Monstserrat.bold, size: geometry.size.width / 10))
-                    .foregroundColor(.white)
-                    .offset(x: viewState.width / 15, y: viewState.height / 15)
-                    .offset(x: 75, y: 50)
+                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
+                    .foregroundColor(Color("component"))
             }
-            .frame(maxWidth: 300)
-            .padding(.horizontal, 16)
+            
+            Spacer()
         }
-        .padding(.top, 100)
-        .frame(height: 200)
+        .padding(.top, 20)
+        .padding(.leading, 20)
+        .frame(height: 150)
         .frame(maxWidth: .infinity)
-        .background(
-            Image("top")
-                .offset(x: viewState.width / 25, y: viewState.height / 25)
-            , alignment: .center
-        )
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.4509803922, alpha: 1)), .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .scaleEffect(isDragging ? 0.9 : 1)
-        .animation(.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.8))
-        .rotation3DEffect(Angle(degrees: 5), axis: (x: viewState.width, y: viewState.height, z:0))
-        .gesture(
-            DragGesture().onChanged { value in
-                self.viewState = value.translation
-                self.isDragging = true
-            }
-            .onEnded { value in
-                self.viewState = .zero
-                self.isDragging = false
-            }
-        )
-        .padding()
     }
 }
 
