@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct MoreView: View {
     @EnvironmentObject var viewModel: ItemViewModel
@@ -105,7 +106,7 @@ struct MoreView: View {
                         
                         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top), content: {
                             VStack {
-                                TextEditor(text: $note)
+                                TextEditor(text: $editItem.note)
                                     .font(.title2)
                                     .frame(width: UIScreen.main.bounds.width - 100, height: 250)
                                     .colorMultiply(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
@@ -114,11 +115,11 @@ struct MoreView: View {
                             .padding(.leading, 50)
                             .padding(.bottom, 15)
                             
-                            if note == "" {
+                            if editItem.note == "" {
                                 Text("Write a note...")
                                     .padding()
                                     .padding(.leading, 50)
-                                    .foregroundColor(Color("primary").opacity(0.8))
+                                    .foregroundColor(Color("primary").opacity(0.28))
                             }
                         })
                         .opacity(isShowNote ? 1 : 0)
@@ -139,13 +140,13 @@ struct MoreView: View {
                             editItem.note,
                             editItem.isDone)
                     } else {
-                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, note)
+                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, editItem.note)
                     }
                     
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {
-                        Text("\(editItem.title != "" ? "Update Task" : "Add New Task")")
+                        Text("\((item != nil) ? "Update Task" : "Add New Task")")
                             .font(Font.custom(FontsManager.Monstserrat.bold, size: 18))
                     }
                     .padding()
@@ -162,11 +163,7 @@ struct MoreView: View {
         .onTapGesture {
             hideKeyboard()
         }
-//        .sheet(isPresented: $isShowMapView, content: {
-//            MapView()
-//                .environmentObject(mapData)
-//        })
-    //}
+        .background(Color("background").edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -207,4 +204,18 @@ struct SubItem: View {
             isShowMapView.toggle()
         }
     }
+}
+
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
 }
