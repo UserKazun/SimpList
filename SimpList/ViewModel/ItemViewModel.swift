@@ -38,6 +38,13 @@ class ItemViewModel: ObservableObject {
         self.items = itemModelStore.items
     }
     
+    func updateItem(_ item: TodoItem, _ title: String, _ startDate: String = "", _ endDate: String = "", _ note: String, _ isDone: Bool) -> TodoItem? {
+        let updatedItem = itemModelStore.updateItem(item.id!, title: title, startDate: startDate, endDate: startDate, note: note, isDone: isDone)
+        items = itemModelStore.items
+        
+        return updatedItem
+    }
+    
     func createItem(_ title: String, _ startDate: String = "", _ endDate: String = "", _ note: String) -> TodoItem {
         let newItem = itemModelStore.createItem(title, startDate, endDate, note)
         items = itemModelStore.items
@@ -53,27 +60,29 @@ class ItemViewModel: ObservableObject {
         self.itemModelStore.toggleIsDone(item)
     }
     
-    func formattedDateForUserData(date: Date) -> String {
+    func formattedDateForUserData(inputDate: Date) -> String {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .medium
         dateFormat.timeStyle = .medium
         dateFormat.dateFormat = "yyyy/M/d E HH:mm"
         dateFormat.timeZone = timeZone
-        let dateString = dateFormat.string(from: date)
+        let dateString = dateFormat.string(from: inputDate)
         
         return dateString
     }
     
-    func formattedDateForHeader() -> String {
+    func formattedDateForDisplayItem(inputDate: String) -> Date {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .medium
         dateFormat.timeStyle = .medium
         dateFormat.dateFormat = "yyyy-MM-dd E"
         dateFormat.timeZone = timeZone
-        let dateString = dateFormat.string(from: Date())
+        let date = dateFormat.date(from: inputDate)
         
-        return dateString
+        return (date)!
     }
+    
+    
     
     static func previewViewModel() -> ItemViewModel {
         let viewModel = ItemViewModel(true)

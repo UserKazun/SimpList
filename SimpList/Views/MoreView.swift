@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MoreView: View {
     @EnvironmentObject var viewModel: ItemViewModel
+    @Environment(\.presentationMode) var presentationMode
     
-    @State var itemTitle: String = ""
     @State var startDate: Date = Date()
     @State var endDate: Date = Date()
     @State var note: String = ""
@@ -18,7 +18,17 @@ struct MoreView: View {
     @State private var isShowMapView: Bool = false
     @State private var isShowNote: Bool = false
     
-    @Binding var isShowMoreView: Bool
+    var item: TodoItem?
+    @State private var editItem: TodoItem
+    
+    init(_ item: TodoItem?) {
+        self.item = item
+        if let item = item {
+            _editItem = State(wrappedValue: TodoItem(item.title, item.startDate, item.endDate, item.note, item.isDone))
+        } else {
+            _editItem = State(wrappedValue: TodoItem("", "", "", ""))
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -28,7 +38,7 @@ struct MoreView: View {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack(alignment: .leading) {
                         HStack {
-                            TextField("New Task ...", text: $itemTitle)
+                            TextField("New Task ...", text: $editItem.title)
                                 .font(Font.custom(FontsManager.Monstserrat.bold, size: 24))
                         }
                         .frame(height: 20)
@@ -42,6 +52,7 @@ struct MoreView: View {
                                 .padding(.trailing, 15)
                             Text("Start")
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
+                                .foregroundColor(Color("primary"))
                                 .padding(.trailing, 10)
                             DatePicker("", selection: $startDate)
                                 .labelsHidden()
@@ -54,6 +65,7 @@ struct MoreView: View {
                                 .padding(.trailing, 15)
                             Text("End")
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
+                                .foregroundColor(Color("primary"))
                                 .padding(.trailing, 17)
                             DatePicker("", selection: $endDate)
                                 .labelsHidden()
@@ -67,6 +79,7 @@ struct MoreView: View {
                             
                             Text("Location")
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
+                                .foregroundColor(Color("primary"))
                         }
                         .padding(.leading, 50)
                         .padding(.bottom, 15)
@@ -80,6 +93,7 @@ struct MoreView: View {
                             
                             Text("Note")
                                 .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
+                                .foregroundColor(Color("primary"))
                         }
                         .padding(.leading, 50)
                         .padding(.bottom, 15)
@@ -100,11 +114,11 @@ struct MoreView: View {
                             .padding(.leading, 50)
                             .padding(.bottom, 15)
                             
-                            if self.note == "" {
+                            if note == "" {
                                 Text("Write a note...")
                                     .padding()
                                     .padding(.leading, 50)
-                                    .foregroundColor(Color.black.opacity(0.18))
+                                    .foregroundColor(Color("primary").opacity(0.8))
                             }
                         })
                         .opacity(isShowNote ? 1 : 0)
@@ -116,22 +130,32 @@ struct MoreView: View {
                     let startDateString = viewModel.formattedDateForUserData(date: startDate)
                     let endDateString = viewModel.formattedDateForUserData(date: endDate)
                     
-                    _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
+                    if let item = item {
+                        _ = viewModel.updateItem(
+                            item,
+                            editItem.title,
+                            editItem.startDate,
+                            editItem.endDate,
+                            editItem.note,
+                            editItem.isDone)
+                    } else {
+                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, note)
+                    }
                     
-                    isShowMoreView.toggle()
+                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {
-                        Text("Add New Task")
+                        Text("\(editItem.title != "" ? "Update Task" : "Add New Task")")
                             .font(Font.custom(FontsManager.Monstserrat.bold, size: 18))
                     }
                     .padding()
                     .frame(width: UIScreen.main.bounds.width - 50, height: 60)
-                    .background(itemTitle == "" ? Color.gray : Color.blue)
+                    .background(editItem.title == "" ? Color.gray : Color("component"))
                     .foregroundColor(.white)
                     .cornerRadius(15)
                 })
                 .padding(.bottom, 40)
-                .disabled(itemTitle == "" ? true : false)
+                .disabled(editItem.title == "" ? true : false)
             })
             
         }
@@ -143,12 +167,6 @@ struct MoreView: View {
 //                .environmentObject(mapData)
 //        })
     //}
-    }
-}
-
-struct MoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        MoreView(isShowMoreView: .constant(true))
     }
 }
 
