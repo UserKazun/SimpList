@@ -127,8 +127,8 @@ struct MoreView: View {
                 })
                 
                 Button(action: {
-                    let startDateString = viewModel.formattedDateForUserData(date: startDate)
-                    let endDateString = viewModel.formattedDateForUserData(date: endDate)
+                    let startDateString = viewModel.formattedDateForUserData(inputDate: startDate)
+                    let endDateString = viewModel.formattedDateForUserData(inputDate: endDate)
                     
                     if let item = item {
                         _ = viewModel.updateItem(
