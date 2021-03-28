@@ -94,7 +94,7 @@ struct MoreView: View {
                             }
                         
                         SubItem(systemName: "pencil", textTitle: "Note")
-                            .padding(.leading, 2)
+                            .padding(.leading, 3)
                             
                         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top), content: {
                             VStack {

@@ -47,10 +47,9 @@ struct HomeView: View {
                                     label: {
                                         VStack(alignment: .leading) {
                                             Text("\(item.title)")
-                                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 18))
+                                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
                                                 .foregroundColor(Color("primary"))
-                                                .truncationMode(.tail)
-                                                .lineLimit(1)
+                                                .lineLimit(nil)
                                         }
                                     })
                                     .contextMenu(menuItems: {
@@ -65,9 +64,10 @@ struct HomeView: View {
                                 
                                 Spacer()
                             }
+                            .padding(.top, 15)
+                            .padding(.bottom, 14)
                             .padding(.leading)
-                            .padding(.trailing, 70)
-                            .padding(.top, 5)
+                            .padding(.trailing, 60)
                         }
                         .padding(.top)
                     })
