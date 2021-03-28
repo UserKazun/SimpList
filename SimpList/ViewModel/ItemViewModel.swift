@@ -82,7 +82,22 @@ class ItemViewModel: ObservableObject {
         return (date)!
     }
     
-    
+    func formattedDateForHeader() -> String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateStyle = .medium
+        dateFormat.timeStyle = .medium
+        
+        if TimeZone(identifier: "America/Halifax") == timeZone {
+            dateFormat.dateFormat = "E MM-dd-yyyy"
+        } else {
+            dateFormat.dateFormat = "yyyy-MM-dd E"
+        }
+        
+        dateFormat.timeZone = timeZone
+        let dateString = dateFormat.string(from: Date())
+        
+        return dateString
+    }
     
     static func previewViewModel() -> ItemViewModel {
         let viewModel = ItemViewModel(true)

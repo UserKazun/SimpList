@@ -18,17 +18,21 @@ struct HomeView: View {
     @State private var isTapItem: Bool = false
     @State var isFocused: Bool = false
     
+    @State var navigationBarHiddened: Bool = false
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
                 VStack {
+                    Header()
+                    
                     HStack {
                         Text("\(viewModel.items.count)")
                             .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
                             .foregroundColor(Color("component"))
                             .fontWeight(.semibold)
                         
-                        Text("Tasks Today")
+                        Text("Tasks")
                             .font(Font.custom(FontsManager.Monstserrat.medium, size: 18))
                             .foregroundColor(Color("primary"))
                             .fontWeight(.semibold)
@@ -134,6 +138,10 @@ struct HomeView: View {
                 MoreView(nil)
             })
             .background(Color("background").edgesIgnoringSafeArea(.all))
+            .navigationBarHidden(navigationBarHiddened)
+            .onAppear {
+                navigationBarHiddened = true
+            }
         }
     }
 }
@@ -141,6 +149,58 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct Header: View {
+    @EnvironmentObject var viewModel: ItemViewModel
+    
+    @State var isShow = false
+    @State var viewState = CGSize.zero
+    @State var isDragging = false
+    
+    var body: some View {
+        VStack {
+            GeometryReader { geometry in
+                Text("SimpList")
+                    .font(Font.custom(FontsManager.Monstserrat.bold, size: geometry.size.width / 10))
+                    .foregroundColor(.white)
+                    .offset(x: viewState.width / 15, y: viewState.height / 15)
+                    .offset(x: 0, y: -70)
+                
+                Text("\(viewModel.formattedDateForHeader())")
+                    .font(Font.custom(FontsManager.Monstserrat.bold, size: geometry.size.width / 10))
+                    .foregroundColor(.white)
+                    .offset(x: viewState.width / 15, y: viewState.height / 15)
+                    .offset(x: 75, y: 50)
+            }
+            .frame(maxWidth: 300)
+            .padding(.horizontal, 16)
+        }
+        .padding(.top, 100)
+        .frame(height: 200)
+        .frame(maxWidth: .infinity)
+        .background(
+            Image("top")
+                .offset(x: viewState.width / 25, y: viewState.height / 25)
+            , alignment: .center
+        )
+        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.4509803922, alpha: 1)), .purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .scaleEffect(isDragging ? 0.9 : 1)
+        .animation(.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.8))
+        .rotation3DEffect(Angle(degrees: 5), axis: (x: viewState.width, y: viewState.height, z:0))
+        .gesture(
+            DragGesture().onChanged { value in
+                self.viewState = value.translation
+                self.isDragging = true
+            }
+            .onEnded { value in
+                self.viewState = .zero
+                self.isDragging = false
+            }
+        )
+        .padding()
     }
 }
 

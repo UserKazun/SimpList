@@ -140,7 +140,7 @@ struct MoreView: View {
                             editItem.note,
                             editItem.isDone)
                     } else {
-                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, note)
+                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, editItem.note)
                     }
                     
                     presentationMode.wrappedValue.dismiss()
@@ -151,7 +151,7 @@ struct MoreView: View {
                     }
                     .padding()
                     .frame(width: UIScreen.main.bounds.width - 50, height: 60)
-                    .background(editItem.title == "" ? Color("primary") : Color("component"))
+                    .background(editItem.title == "" ? Color.gray : Color("component"))
                     .foregroundColor(.white)
                     .cornerRadius(15)
                 })
