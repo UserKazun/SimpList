@@ -11,6 +11,8 @@ import CoreData
 struct HomeView: View {
     @EnvironmentObject var viewModel: ItemViewModel
     
+    let dateFormat = DateFormat()
+    
     @State private var itemTitle: String = ""
     @State private var date: Date = Date()
     
@@ -80,7 +82,6 @@ struct HomeView: View {
                         Image(systemName: "plus")
                             .font(.title2)
                     }
-                    //.padding()
                     .frame(width: 50, height: 50)
                     .background(Color("component"))
                     .foregroundColor(.white)
@@ -109,6 +110,8 @@ struct HomeView_Previews: PreviewProvider {
 struct Header: View {
     @EnvironmentObject var viewModel: ItemViewModel
     
+    let dateFormat = DateFormat()
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -122,7 +125,7 @@ struct Header: View {
                     .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
                     .foregroundColor(Color("primary"))
                 
-                Text("\(viewModel.formattedDateForHeader())")
+                Text("\(dateFormat.formattedDateForHeader())")
                     .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
                     .foregroundColor(Color("component"))
             }
@@ -186,48 +189,6 @@ struct ItemContent: View {
         .onTapGesture {
             isShowMoreView.toggle()
         }
-    }
-}
-
-struct CustomTextField: View {
-    @EnvironmentObject var viewModel: ItemViewModel
-    @Binding var date: Date
-    @Binding var itemTitle: String
-    @Binding var isShowMoreView: Bool
-    @Binding var isFocused: Bool
-    
-    var body: some View {
-        HStack {
-            TextField("Write a new task...", text: $itemTitle,
-                      onCommit: {
-                        if itemTitle != "" {
-                            let startDateString = viewModel.formattedDateForUserData(inputDate: date)
-                            let endDateString = ""
-                            let note = ""
-                            _ = viewModel.createItem(itemTitle, startDateString, endDateString, note)
-                        }
-                        
-                        itemTitle = ""
-                      })
-                .padding()
-                .onTapGesture {
-                    isFocused.toggle()
-                }
-            
-            Button(action: {
-                isShowMoreView.toggle()
-            }, label: {
-                Text("more")
-                    .font(Font.custom(FontsManager.Monstserrat.medium, size: 17))
-            })
-            .padding()
-        }
-        .frame(height: 50)
-        .background(Color("secondary"))
-        .cornerRadius(15)
-        .padding()
-        .padding(.top, 20)
-        .animation(.spring())
     }
 }
 

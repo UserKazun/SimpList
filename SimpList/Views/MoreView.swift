@@ -6,18 +6,21 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct MoreView: View {
     @EnvironmentObject var viewModel: ItemViewModel
     @Environment(\.presentationMode) var presentationMode
+    
+    let dateFormat = DateFormat()
     
     @State var startDate: Date = Date()
     @State var endDate: Date = Date()
     @State var note: String = ""
     
     @State private var isShowMapView: Bool = false
-    
+    @State private var isShowStartDatePicker: Bool = false
+    @State private var isShowEndDatePicker: Bool = false
+    @State private var isShowTextEditor: Bool = false
     @State private var isFocused: Bool = false
     
     var item: TodoItem?
@@ -36,7 +39,7 @@ struct MoreView: View {
         ZStack {
 //            MapView()
 //                .opacity(isShowMapView ? 1 : 0)
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack(alignment: .leading) {
                         HStack {
@@ -62,11 +65,17 @@ struct MoreView: View {
                                 .foregroundColor(Color("component"))
                         }
                         .padding(.leading, 50)
+                        .onTapGesture {
+                            withAnimation {
+                                isShowStartDatePicker.toggle()
+                            }
+                        }
                         
                         DatePicker("", selection: $startDate)
                             .labelsHidden()
                             .padding(.leading, 94)
                             .padding(.bottom, 10)
+                            .opacity(isShowStartDatePicker ? 1 : 0)
                         
                         HStack {
                             Image(systemName: "arrow.counterclockwise.circle")
@@ -81,11 +90,17 @@ struct MoreView: View {
                                 .foregroundColor(Color("component"))
                         }
                         .padding(.leading, 50)
+                        .onTapGesture {
+                            withAnimation {
+                                isShowEndDatePicker.toggle()
+                            }
+                        }
                         
                         DatePicker("", selection: $endDate)
                             .labelsHidden()
                             .padding(.leading, 94)
                             .padding(.bottom, 15)
+                            .opacity(isShowEndDatePicker ? 1 : 0)
                         
                         SubItem(systemName: "location", textTitle: "Location")
                             .padding(.bottom, 20)
@@ -93,8 +108,19 @@ struct MoreView: View {
                                 isShowMapView.toggle()
                             }
                         
-                        SubItem(systemName: "pencil", textTitle: "Note")
-                            .padding(.leading, 3)
+                        HStack {
+                            Image(systemName: "pencil")
+                                .padding(.trailing, 15)
+                            
+                            Text("Note")
+                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
+                        }
+                        .padding(.leading, 53)
+                        .onTapGesture {
+                            withAnimation {
+                                isShowTextEditor.toggle()
+                            }
+                        }
                             
                         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top), content: {
                             VStack {
@@ -117,43 +143,56 @@ struct MoreView: View {
                                     .foregroundColor(Color("primary").opacity(0.28))
                             }
                         })
-                        
+                        .opacity(isShowTextEditor || editItem.note != "" ? 1 : 0)
                     }
                 })
-                .offset(y: isFocused ? -120 : 0)
+                .offset(y: isFocused ? -50 : 0)
                 
                 Button(action: {
-                    let startDateString = viewModel.formattedDateForUserData(inputDate: startDate)
-                    let endDateString = viewModel.formattedDateForUserData(inputDate: endDate)
+                    let startDateString = dateFormat.formattedDateForUserData(inputDate: startDate)
+                    let endDateString = dateFormat.formattedDateForUserData(inputDate: endDate)
                     
                     if let item = item {
-                        _ = viewModel.updateItem(
-                            item,
-                            editItem.title,
-                            editItem.startDate,
-                            editItem.endDate,
-                            editItem.note,
-                            editItem.isDone)
+                        if isShowStartDatePicker || isShowEndDatePicker {
+                            _ = viewModel.updateItem(
+                                item,
+                                editItem.title,
+                                isShowStartDatePicker ? startDateString : "",
+                                isShowEndDatePicker ? endDateString : "",
+                                editItem.note,
+                                editItem.isDone)
+                        } else {
+                            _ = viewModel.updateItem(
+                                item,
+                                editItem.title,
+                                editItem.startDate,
+                                editItem.endDate,
+                                editItem.note,
+                                editItem.isDone)
+                        }
+                        
                     } else {
-                        _ = viewModel.createItem(editItem.title, startDateString, endDateString, editItem.note)
+                        _ = viewModel.createItem(
+                            editItem.title,
+                            isShowStartDatePicker ? startDateString : "",
+                            isShowEndDatePicker ? endDateString : "",
+                            editItem.note)
                     }
                     
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {
-                        Text("\((item != nil) ? "Update Task" : "Add New Task")")
-                            .font(Font.custom(FontsManager.Monstserrat.bold, size: 18))
+                        Image(systemName: "checkmark")
+                            .font(.title2)
                     }
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 50, height: 60)
+                    .frame(width: 50, height: 50)
                     .background(editItem.title == "" ? Color.gray : Color("component"))
                     .foregroundColor(.white)
                     .cornerRadius(15)
                 })
-                .padding(.bottom, 40)
+                .padding()
                 .disabled(editItem.title == "" ? true : false)
             })
-            
         }
         .onTapGesture {
             isFocused = false
@@ -196,16 +235,16 @@ struct SubItem: View {
     }
 }
 
-struct NavigationConfigurator: UIViewControllerRepresentable {
-    var configure: (UINavigationController) -> Void = { _ in }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
-        UIViewController()
-    }
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
-        if let nc = uiViewController.navigationController {
-            self.configure(nc)
-        }
-    }
-
-}
+//struct NavigationConfigurator: UIViewControllerRepresentable {
+//    var configure: (UINavigationController) -> Void = { _ in }
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+//        UIViewController()
+//    }
+//    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+//        if let nc = uiViewController.navigationController {
+//            self.configure(nc)
+//        }
+//    }
+//
+//}
