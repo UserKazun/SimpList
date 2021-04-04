@@ -39,6 +39,7 @@
 		0F87DEF0260756A200BC5F00 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DEEF260756A200BC5F00 /* FontsManager.swift */; };
 		0F87DEF6260772EC00BC5F00 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEF5260772EC00BC5F00 /* .gitignore */; };
 		0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */; };
+		0FE8F63E26198D72003417F3 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8F63D26198D72003417F3 /* DateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		0F87DEEF260756A200BC5F00 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		0F87DEF5260772EC00BC5F00 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		0FE8F63D26198D72003417F3 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		0F19439925FD07F5004256B0 /* SimpList */ = {
 			isa = PBXGroup;
 			children = (
+				0FE8F63C26198D63003417F3 /* Function */,
 				0F87DEB92607506A00BC5F00 /* FunctionalViews */,
 				0F1943BB25FD0A68004256B0 /* Views */,
 				0F1943B625FD093F004256B0 /* ViewModel */,
@@ -216,6 +219,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0FE8F63C26198D63003417F3 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8F63D26198D72003417F3 /* DateFormat.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,6 +332,7 @@
 				0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */,
 				0F19439B25FD07F5004256B0 /* SimpListApp.swift in Sources */,
 				0F20127F260F64FE00B6885D /* MoreView.swift in Sources */,
+				0FE8F63E26198D72003417F3 /* DateFormat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
