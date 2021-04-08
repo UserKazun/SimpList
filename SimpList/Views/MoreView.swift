@@ -102,12 +102,6 @@ struct MoreView: View {
                             .padding(.bottom, 15)
                             .opacity(isShowEndDatePicker ? 1 : 0)
                         
-                        SubItem(systemName: "location", textTitle: "Location")
-                            .padding(.bottom, 20)
-                            .onTapGesture {
-                                isShowMapView.toggle()
-                            }
-                        
                         HStack {
                             Image(systemName: "pencil")
                                 .padding(.trailing, 15)
@@ -218,33 +212,3 @@ struct SubTaskTextField: View {
         .padding(.leading, 50)
     }
 }
-
-struct SubItem: View {
-    var systemName: String = ""
-    var textTitle: String = ""
-    
-    var body: some View {
-        HStack {
-            Image(systemName: systemName)
-                .padding(.trailing, 15)
-            
-            Text(textTitle)
-                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
-        }
-        .padding(.leading, 50)
-    }
-}
-
-//struct NavigationConfigurator: UIViewControllerRepresentable {
-//    var configure: (UINavigationController) -> Void = { _ in }
-//
-//    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
-//        UIViewController()
-//    }
-//    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
-//        if let nc = uiViewController.navigationController {
-//            self.configure(nc)
-//        }
-//    }
-//
-//}
