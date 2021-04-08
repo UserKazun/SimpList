@@ -35,7 +35,7 @@ struct HomeView: View {
                                     self.viewModel.toggleIsDone(item)
                                 }, label: {
                                     if item.isDone {
-                                        LottieView()
+                                        Image("check")
                                             .frame(width: 45, height: 45)
                                     } else {
                                         Image(systemName: "circle")
