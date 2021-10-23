@@ -26,8 +26,6 @@ struct HomeView: View {
         NavigationView {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
                 VStack {
-                    Header()
-                    
                     ScrollView(.vertical, showsIndicators: false, content: {
                         ForEach(viewModel.items, id: \.self) { item in
                             HStack(spacing: 20) {
@@ -74,20 +72,6 @@ struct HomeView: View {
                         .padding(.top)
                     })
                 }
-                
-                Button(action: {
-                    isShowMoreView.toggle()
-                }, label: {
-                    HStack {
-                        Image(systemName: "plus")
-                            .font(.title2)
-                    }
-                    .frame(width: 50, height: 50)
-                    .background(Color("component"))
-                    .foregroundColor(.white)
-                    .cornerRadius(15)
-                })
-                .padding()
             })
             .sheet(isPresented: $isShowMoreView, content: {
                 MoreView(nil)
@@ -105,38 +89,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(ItemViewModel(true))
-    }
-}
-
-struct Header: View {
-    @EnvironmentObject var viewModel: ItemViewModel
-    
-    let dateFormat = DateFormat()
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Welcome!")
-                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
-                    .foregroundColor(Color("primary"))
-                
-                Spacer()
-                
-                Text("Today")
-                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
-                    .foregroundColor(Color("primary"))
-                
-                Text("\(dateFormat.formattedDateForHeader())")
-                    .font(Font.custom(FontsManager.Monstserrat.bold, size: 30))
-                    .foregroundColor(Color("component"))
-            }
-            
-            Spacer()
-        }
-        .padding(.top, 20)
-        .padding(.leading, 20)
-        .frame(height: 150)
-        .frame(maxWidth: .infinity)
     }
 }
 
