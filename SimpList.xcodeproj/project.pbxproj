@@ -14,7 +14,6 @@
 		0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943BC25FD0A7C004256B0 /* HomeView.swift */; };
 		0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */; };
 		0F20127F260F64FE00B6885D /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20127E260F64FE00B6885D /* MoreView.swift */; };
-		0F87DEB72607504500BC5F00 /* checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEB62607504500BC5F00 /* checkmark.json */; };
 		0F87DEDB2607568600BC5F00 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEC82607568600BC5F00 /* Montserrat-LightItalic.ttf */; };
 		0F87DEDC2607568600BC5F00 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEC92607568600BC5F00 /* Montserrat-Medium.ttf */; };
 		0F87DEDD2607568600BC5F00 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DECA2607568600BC5F00 /* Montserrat-BoldItalic.ttf */; };
@@ -50,7 +49,6 @@
 		0F1943BC25FD0A7C004256B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0F1943D325FD198A004256B0 /* SimpList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpList.xcdatamodel; sourceTree = "<group>"; };
 		0F20127E260F64FE00B6885D /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		0F87DEB62607504500BC5F00 /* checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkmark.json; sourceTree = "<group>"; };
 		0F87DEC82607568600BC5F00 /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
 		0F87DEC92607568600BC5F00 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		0F87DECA2607568600BC5F00 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				0F19439A25FD07F5004256B0 /* SimpListApp.swift */,
 				0F87DEC62607566C00BC5F00 /* Fonts */,
 				0F19439E25FD07F7004256B0 /* Assets.xcassets */,
-				0F87DEB62607504500BC5F00 /* checkmark.json */,
 				0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */,
 				0F1943A325FD07F7004256B0 /* Info.plist */,
 				0F298D772604FA090031760C /* SimpListTests */,
@@ -289,7 +286,6 @@
 				0F87DEE02607568600BC5F00 /* Montserrat-ExtraLight.ttf in Resources */,
 				0F87DEDC2607568600BC5F00 /* Montserrat-Medium.ttf in Resources */,
 				0F1943A225FD07F7004256B0 /* Preview Assets.xcassets in Resources */,
-				0F87DEB72607504500BC5F00 /* checkmark.json in Resources */,
 				0F87DEE42607568600BC5F00 /* Montserrat-BlackItalic.ttf in Resources */,
 				0F87DEE52607568600BC5F00 /* Montserrat-SemiBold.ttf in Resources */,
 				0F87DEEB2607568600BC5F00 /* Montserrat-Italic.ttf in Resources */,
