@@ -26,6 +26,8 @@ struct HomeView: View {
         NavigationView {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
                 VStack {
+                    Header()
+                    
                     ScrollView(.vertical, showsIndicators: false, content: {
                         ForEach(viewModel.items, id: \.self) { item in
                             HStack(spacing: 20) {
@@ -76,7 +78,22 @@ struct HomeView: View {
             .sheet(isPresented: $isShowMoreView, content: {
                 MoreView(nil)
             })
-            .background(Color("background").edgesIgnoringSafeArea(.all))
+            .background(
+                Image("Bg")
+                    .rotationEffect(.degrees(10))
+                    .offset(x: 460, y: -120)
+                    .accessibility(hidden: true)
+            )
+            .background(
+                Image("Bg2")
+                    .offset(x: 190, y: 40)
+                    .accessibility(hidden: true)
+            )
+            .background(
+                Image("Bg3")
+                    .rotationEffect(.degrees(-10))
+                    .offset(x: -250, y: -300)
+            )
             .navigationBarHidden(isNavigationBarHidden)
             .onAppear {
                 isNavigationBarHidden = true
