@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FontsManager {
     struct Monstserrat {
-        static let bold = "Montserrat-SemiBold"
+        static let bold = "Montserrat-Bold"
+        static let semiBold = "Montserrat-SemiBold"
         static let regular = "Montserrat-Regular"
         static let light = "Montserrat-Light"
         static let medium = "Montserrat-Medium"

@@ -10,7 +10,7 @@ import os
 
 @main
 struct SimpListApp: App {
-    @StateObject var viewModel: ItemViewModel
+    @StateObject var viewModel = ItemViewModel(true)
     
     static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "SimpListApp")
     
@@ -21,7 +21,7 @@ struct SimpListApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ContentView()
                 .environmentObject(viewModel)
         }
     }
