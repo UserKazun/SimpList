@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Bg2.png",
+      "filename" : "coding-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Bg_dark.png",
+      "filename" : "coding-2-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
