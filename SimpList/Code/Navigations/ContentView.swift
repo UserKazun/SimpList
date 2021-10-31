@@ -19,8 +19,6 @@ struct ContentView: View {
                     HomeView()
                 case .analysis:
                     AnalysisView()
-                case .addItem:
-                    AddItemView()
                 case .settings:
                     SettingsView()
                 }

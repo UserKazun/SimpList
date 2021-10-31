@@ -25,7 +25,7 @@ struct Header: View {
             .cornerRadius(15)
             .overlay(
                 Image("header")
-                    .offset(y: 70)
+                    .offset(y: 50)
             )
         }
     }
