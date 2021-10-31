@@ -20,85 +20,52 @@ struct HomeView: View {
     @State private var isTapItem: Bool = false
     @State var isFocused: Bool = false
     
-    @State var isNavigationBarHidden: Bool = false
-    
     var body: some View {
-        NavigationView {
-            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
-                VStack {
-                    Header()
-                    
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        ForEach(viewModel.items, id: \.self) { item in
-                            HStack(spacing: 20) {
-                                Button(action: {
-                                    self.viewModel.toggleIsDone(item)
-                                }, label: {
-                                    if item.isDone {
-                                        Image("check")
-                                            .frame(width: 45, height: 45)
-                                    } else {
-                                        Image(systemName: "circle")
-                                            .font(.title2)
-                                            .frame(width: 45, height: 45)
-                                    }
-                                })
-                                
-                                NavigationLink(
-                                    destination: MoreView(item).navigationBarTitleDisplayMode(.inline),
-                                    label: {
-                                        VStack(alignment: .leading) {
-                                            Text("\(item.title)")
-                                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 17))
-                                                .foregroundColor(Color("primary"))
-                                                .lineLimit(nil)
-                                        }
-                                    })
-                                    .contextMenu(menuItems: {
-                                        Button(action: {
-                                            withAnimation {
-                                                viewModel.deleteItem(item)
-                                            }
-                                        }, label: {
-                                            Text("Delete")
-                                        })
-                                    })
-                                
-                                Spacer()
-                            }
-                            .padding(.top, 15)
-                            .padding(.bottom, 14)
-                            .padding(.leading)
-                            .padding(.trailing, 60)
+        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
+            VStack {
+                Header()
+                
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    ForEach(viewModel.items, id: \.self) { item in
+                        HStack(spacing: 20) {
+                            Button(action: {
+                                self.viewModel.toggleIsDone(item)
+                            }, label: {
+                                if item.isDone {
+                                    Image("check")
+                                        .frame(width: 45, height: 45)
+                                } else {
+                                    Image(systemName: "circle")
+                                        .font(.title2)
+                                        .frame(width: 45, height: 45)
+                                }
+                            })
                         }
-                        .padding(.top)
-                    })
-                }
-            })
-            .sheet(isPresented: $isShowMoreView, content: {
-                MoreView(nil)
-            })
-            .background(
-                Image("Bg")
-                    .rotationEffect(.degrees(10))
-                    .offset(x: 460, y: -120)
-                    .accessibility(hidden: true)
-            )
-            .background(
-                Image("Bg2")
-                    .offset(x: 190, y: 40)
-                    .accessibility(hidden: true)
-            )
-            .background(
-                Image("Bg3")
-                    .rotationEffect(.degrees(-10))
-                    .offset(x: -250, y: -300)
-            )
-            .navigationBarHidden(isNavigationBarHidden)
-            .onAppear {
-                isNavigationBarHidden = true
+                        .padding(.top, 15)
+                        .padding(.bottom, 14)
+                        .padding(.leading)
+                        .padding(.trailing, 60)
+                    }
+                    .padding(.top)
+                })
             }
-        }
+        })
+        .background(
+            Image("Bg")
+                .rotationEffect(.degrees(10))
+                .offset(x: 460, y: -120)
+                .accessibility(hidden: true)
+        )
+        .background(
+            Image("Bg2")
+                .offset(x: 190, y: 40)
+                .accessibility(hidden: true)
+        )
+        .background(
+            Image("Bg3")
+                .rotationEffect(.degrees(-10))
+                .offset(x: -250, y: -300)
+        )
     }
 }
 
