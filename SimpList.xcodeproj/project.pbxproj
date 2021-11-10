@@ -15,6 +15,7 @@
 		0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */; };
 		0F2051ED27245F5000A3FD98 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2051EC27245F5000A3FD98 /* Header.swift */; };
 		0F2051F02724609100A3FD98 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2051EF2724609100A3FD98 /* TextModifiers.swift */; };
+		0F759567272E89DC00741AF8 /* AddItemModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F759566272E89DC00741AF8 /* AddItemModal.swift */; };
 		0F85806027244AD800E9556E /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F85805F27244AD800E9556E /* TabItem.swift */; };
 		0F85806227244E9D00E9556E /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F85806127244E9D00E9556E /* TabBar.swift */; };
 		0F8580652724504C00E9556E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8580642724504C00E9556E /* ContentView.swift */; };
@@ -57,6 +58,7 @@
 		0F1943D325FD198A004256B0 /* SimpList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpList.xcdatamodel; sourceTree = "<group>"; };
 		0F2051EC27245F5000A3FD98 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		0F2051EF2724609100A3FD98 /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
+		0F759566272E89DC00741AF8 /* AddItemModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemModal.swift; sourceTree = "<group>"; };
 		0F85805F27244AD800E9556E /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
 		0F85806127244E9D00E9556E /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		0F8580642724504C00E9556E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			children = (
 				0F85806127244E9D00E9556E /* TabBar.swift */,
 				0F2051EC27245F5000A3FD98 /* Header.swift */,
+				0F759566272E89DC00741AF8 /* AddItemModal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			files = (
 				0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */,
 				0F1943D425FD198A004256B0 /* SimpList.xcdatamodeld in Sources */,
+				0F759567272E89DC00741AF8 /* AddItemModal.swift in Sources */,
 				0F87DEF0260756A200BC5F00 /* FontsManager.swift in Sources */,
 				0F1943B825FD095A004256B0 /* ItemViewModel.swift in Sources */,
 				0F1943BD25FD0A7C004256B0 /* HomeView.swift in Sources */,
