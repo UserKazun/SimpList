@@ -58,6 +58,7 @@ struct ItemModelStore {
     }
 }
 
+// MARK: CoreData dependent
 extension TodoItem {
     init(_ item: Item) {
         self.id = item.id
