@@ -45,7 +45,19 @@
 		0F87DEF6260772EC00BC5F00 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0F87DEF5260772EC00BC5F00 /* .gitignore */; };
 		0F9CA5312600C7BF0044F2B5 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */; };
 		0FE8F63E26198D72003417F3 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8F63D26198D72003417F3 /* DateFormat.swift */; };
+		0FF8FE2A2740019E00E8D282 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF8FE292740019E00E8D282 /* ModelTests.swift */; };
+		0FF8FE31274001D500E8D282 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF8FE30274001D500E8D282 /* ViewModelTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0FF8FE2B2740019E00E8D282 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F19438F25FD07F5004256B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F19439625FD07F5004256B0;
+			remoteInfo = SimpList;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0F19439725FD07F5004256B0 /* SimpList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,10 +100,20 @@
 		0F87DEF5260772EC00BC5F00 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0F9CA5302600C7BF0044F2B5 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		0FE8F63D26198D72003417F3 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		0FF8FE272740019E00E8D282 /* SimpListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FF8FE292740019E00E8D282 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		0FF8FE30274001D500E8D282 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0F19439425FD07F5004256B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FF8FE242740019E00E8D282 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -105,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				0F19439925FD07F5004256B0 /* SimpList */,
+				0FF8FE282740019E00E8D282 /* SimpListTests */,
 				0F19439825FD07F5004256B0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				0F19439725FD07F5004256B0 /* SimpList.app */,
+				0FF8FE272740019E00E8D282 /* SimpListTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,8 +150,6 @@
 				0F19439E25FD07F7004256B0 /* Assets.xcassets */,
 				0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */,
 				0F1943A325FD07F7004256B0 /* Info.plist */,
-				0FE1A8A5273F53EC009E985B /* SimpListTests */,
-				0F298D782604FA160031760C /* SimpListUITests */,
 				0F1943A025FD07F7004256B0 /* Preview Content */,
 			);
 			path = SimpList;
@@ -166,13 +188,6 @@
 				0F2051EF2724609100A3FD98 /* TextModifiers.swift */,
 			);
 			path = Styles;
-			sourceTree = "<group>";
-		};
-		0F298D782604FA160031760C /* SimpListUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SimpListUITests;
 			sourceTree = "<group>";
 		};
 		0F85805C2724492600E9556E /* Components */ = {
@@ -260,19 +275,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0FE1A8A5273F53EC009E985B /* SimpListTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SimpListTests;
-			sourceTree = "<group>";
-		};
 		0FE8F63C26198D63003417F3 /* Function */ = {
 			isa = PBXGroup;
 			children = (
 				0FE8F63D26198D72003417F3 /* DateFormat.swift */,
 			);
 			path = Function;
+			sourceTree = "<group>";
+		};
+		0FF8FE282740019E00E8D282 /* SimpListTests */ = {
+			isa = PBXGroup;
+			children = (
+				0FF8FE292740019E00E8D282 /* ModelTests.swift */,
+				0FF8FE30274001D500E8D282 /* ViewModelTests.swift */,
+			);
+			path = SimpListTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,17 +314,39 @@
 			productReference = 0F19439725FD07F5004256B0 /* SimpList.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0FF8FE262740019E00E8D282 /* SimpListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FF8FE2D2740019E00E8D282 /* Build configuration list for PBXNativeTarget "SimpListTests" */;
+			buildPhases = (
+				0FF8FE232740019E00E8D282 /* Sources */,
+				0FF8FE242740019E00E8D282 /* Frameworks */,
+				0FF8FE252740019E00E8D282 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FF8FE2C2740019E00E8D282 /* PBXTargetDependency */,
+			);
+			name = SimpListTests;
+			productName = SimpListTests;
+			productReference = 0FF8FE272740019E00E8D282 /* SimpListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		0F19438F25FD07F5004256B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					0F19439625FD07F5004256B0 = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					0FF8FE262740019E00E8D282 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 0F19439625FD07F5004256B0;
 					};
 				};
 			};
@@ -327,6 +366,7 @@
 			projectRoot = "";
 			targets = (
 				0F19439625FD07F5004256B0 /* SimpList */,
+				0FF8FE262740019E00E8D282 /* SimpListTests */,
 			);
 		};
 /* End PBXProject section */
@@ -361,6 +401,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0FF8FE252740019E00E8D282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -387,7 +434,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0FF8FE232740019E00E8D282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FF8FE31274001D500E8D282 /* ViewModelTests.swift in Sources */,
+				0FF8FE2A2740019E00E8D282 /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0FF8FE2C2740019E00E8D282 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F19439625FD07F5004256B0 /* SimpList */;
+			targetProxy = 0FF8FE2B2740019E00E8D282 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0F1943A425FD07F7004256B0 /* Debug */ = {
@@ -552,6 +616,54 @@
 			};
 			name = Release;
 		};
+		0FF8FE2E2740019E00E8D282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JKUQA5CGR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devKazu.SimpListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpList.app/SimpList";
+			};
+			name = Debug;
+		};
+		0FF8FE2F2740019E00E8D282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JKUQA5CGR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devKazu.SimpListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpList.app/SimpList";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -569,6 +681,15 @@
 			buildConfigurations = (
 				0F1943A725FD07F7004256B0 /* Debug */,
 				0F1943A825FD07F7004256B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FF8FE2D2740019E00E8D282 /* Build configuration list for PBXNativeTarget "SimpListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FF8FE2E2740019E00E8D282 /* Debug */,
+				0FF8FE2F2740019E00E8D282 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
