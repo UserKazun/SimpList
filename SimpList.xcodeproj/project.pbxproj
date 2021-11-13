@@ -126,7 +126,7 @@
 				0F19439E25FD07F7004256B0 /* Assets.xcassets */,
 				0F1943D225FD198A004256B0 /* SimpList.xcdatamodeld */,
 				0F1943A325FD07F7004256B0 /* Info.plist */,
-				0F298D772604FA090031760C /* SimpListTests */,
+				0FE1A8A5273F53EC009E985B /* SimpListTests */,
 				0F298D782604FA160031760C /* SimpListUITests */,
 				0F1943A025FD07F7004256B0 /* Preview Content */,
 			);
@@ -166,13 +166,6 @@
 				0F2051EF2724609100A3FD98 /* TextModifiers.swift */,
 			);
 			path = Styles;
-			sourceTree = "<group>";
-		};
-		0F298D772604FA090031760C /* SimpListTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SimpListTests;
 			sourceTree = "<group>";
 		};
 		0F298D782604FA160031760C /* SimpListUITests */ = {
@@ -265,6 +258,13 @@
 				0F85805F27244AD800E9556E /* TabItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0FE1A8A5273F53EC009E985B /* SimpListTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SimpListTests;
 			sourceTree = "<group>";
 		};
 		0FE8F63C26198D63003417F3 /* Function */ = {
