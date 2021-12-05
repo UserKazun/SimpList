@@ -15,6 +15,7 @@ struct SimpListApp: App {
     static let logger = Logger(subsystem: "com.devKazu.SimpList", category: "SimpListApp")
     
     init() {
+        // ProcessInfo.processInfo.arguments で起動時の引数を取得
         let inMemory: Bool = ProcessInfo.processInfo.arguments.contains("TestWithInMemory")
         _viewModel = StateObject(wrappedValue: ItemViewModel(inMemory))
     }
