@@ -48,6 +48,10 @@ struct HomeView: View {
                     }
                     .padding(.top)
                 })
+                
+                AddItemButton()
+                    .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                    .padding(30)
             }
         })
         .background(
