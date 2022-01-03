@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct AddItemButton: View {
+    @Binding var showAddItem: Bool
+    
     var body: some View {
         Button(action: {
-            
+            showAddItem.toggle()
         }, label: {
             ZStack {
                 Image(systemName: "plus")
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .background(
                         Circle()
                             .frame(width: 50, height: 50)
-                            .foregroundColor(.blue)
+                            .foregroundColor(Color("component"))
                             .shadow(color: .gray, radius: 15, x: 8, y: 0.5)
                     )
             }
@@ -29,6 +31,6 @@ struct AddItemButton: View {
 
 struct AddItemButton_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemButton()
+        AddItemButton(showAddItem: .constant(false))
     }
 }

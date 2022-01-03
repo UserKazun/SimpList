@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct AddItemModal: View {
+    @EnvironmentObject var viewModel: ItemViewModel
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var title = ""
     @State var note = ""
     
+    @State private var editItem: TodoItem
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Add a new Task!")
-                .font(.title).bold()
-                .padding()
-                .padding(.leading)
-            
-            form
+        ZStack {
+            VStack(alignment: .leading) {
+                Text("Add a new Task!")
+                    .font(.title).bold()
+                    .padding()
+                    .padding(.leading)
+                
+                form
+            }
+            .background(.ultraThinMaterial)
+            .cornerRadius(30)
         }
-        .background(.ultraThinMaterial)
-        .cornerRadius(30)
     }
     
     var form: some View {
@@ -47,7 +54,9 @@ struct AddItemModal: View {
                 .padding()
             
             Button {
-                
+                _ = viewModel.createItem(
+                    editItem.title,
+                    editItem.note, "", "")
             } label: {
                 AddTaskButton()
             }
@@ -55,21 +64,21 @@ struct AddItemModal: View {
     }
 }
 
-struct AddItemModal_Previews: PreviewProvider {
-    static var previews: some View {
-        AddItemModal()
-    }
-}
+//struct AddItemModal_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddItemModal(, editItem: <#TodoItem#>)
+//    }
+//}
 
 struct AddTaskButton: View {
     var body: some View {
         VStack {
             Text("Add Task")
                 .font(.headline)
-            .foregroundStyle(.black)
+            .foregroundStyle(.white)
         }
         .frame(width: UIScreen.main.bounds.width, height: 50)
-        .background(Color.blue)
+        .background(Color("component"))
         .cornerRadius(15)
         .padding()
     }
