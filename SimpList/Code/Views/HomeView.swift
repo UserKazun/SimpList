@@ -20,6 +20,8 @@ struct HomeView: View {
     @State private var isTapItem: Bool = false
     @State var isFocused: Bool = false
     
+    @State var showAddItem: Bool = false
+    
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
             VStack {
@@ -40,16 +42,22 @@ struct HomeView: View {
                                         .frame(width: 45, height: 45)
                                 }
                             })
+                                .padding()
+                            
+                            Text(item.title)
+                                .font(Font.custom(FontsManager.Monstserrat.regular, size: 22))
+                            
+                            Spacer()
                         }
-                        .padding(.top, 15)
-                        .padding(.bottom, 14)
-                        .padding(.leading)
-                        .padding(.trailing, 60)
+                        .frame(width: 334, height: 74)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(15)
+                        .padding()
                     }
                     .padding(.top)
                 })
                 
-                AddItemButton()
+                AddItemButton(showAddItem: $showAddItem)
                     .frame(maxWidth: .infinity, alignment: .bottomTrailing)
                     .padding(30)
             }
@@ -70,6 +78,9 @@ struct HomeView: View {
                 .rotationEffect(.degrees(-10))
                 .offset(x: -250, y: -300)
         )
+        .sheet(isPresented: $showAddItem) {
+            AddItemView(nil)
+        }
     }
 }
 
